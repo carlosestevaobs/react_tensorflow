@@ -231,13 +231,7 @@ function ExampleTensorFlow() {
                             <strong>Acurácia:</strong> {acuraciaTeste ? acuraciaTeste.toFixed(4) : '- '} 
                             <strong> Loss:</strong> {lossTeste ? lossTeste.toFixed(4) : '-'}
                             
-                            {chartData && (
-                                <LinePlot
-                                    acuracias={chartData.acuracias}
-                                    losses={chartData.losses}
-                                    melhorEpoch={chartData.melhorEpoch}
-                                />
-                            )}
+                           
 
                             {/*<div>
                                 <h2>Predições:</h2>
@@ -260,13 +254,23 @@ function ExampleTensorFlow() {
                                         </div>*/}
                         </div>
                         <div>
+                        {chartData && (
+                                <LinePlot
+                                    acuracias={chartData.acuracias}
+                                    losses={chartData.losses}
+                                    melhorEpoch={chartData.melhorEpoch}
+                                />
+                            )}
+                        </div>
+                        <div>
 
                             <h2>Matriz de Confusão - Treinamento:</h2>
                             <ConfusionMatrixPlot
                                 reais={reaisTreino}
                                 preditos={preditosTreino}
                             />
-                   
+                   </div>
+                   <div>
 
                             <h2>Matriz de Confusão - Teste:</h2>
                             <ConfusionMatrixPlot
