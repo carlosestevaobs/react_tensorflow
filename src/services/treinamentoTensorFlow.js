@@ -12,7 +12,7 @@ async function treinarTensorFlow(
   acuraciasTreinoRef,
   lossesTreinoRef,
   epocas,
-  setChartData,
+  setChartData, 
   normalize,
   divisaoConjunto,
   setPreditosTreino,
@@ -24,6 +24,7 @@ async function treinarTensorFlow(
   try {
     const { treino: dadosTreino, teste: dadosTeste, colunas: numColunas, numClasses: nClasses } = await divideTreinoETeste(datapath, divisaoConjunto, normalize);
 
+    
     const model = tf.sequential();
     model.add(tf.layers.dense({ units: 10, inputShape: [numColunas - 1], activation: 'relu' }));
     model.add(tf.layers.dense({ units: nClasses, activation: 'softmax' }));
