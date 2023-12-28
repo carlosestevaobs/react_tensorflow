@@ -65,6 +65,7 @@ async function treinarKNN(
       const prediction = getMostCommon(neighbors);
       predictionsTreino.push(prediction);
     }
+
     setReaisTreino(labelsTreino);
     setPreditosTreino(predictionsTreino);
 
