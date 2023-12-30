@@ -1,56 +1,23 @@
 import React, { useState } from 'react';
 import ScatterPlot from '../../graphs/ScatterPlot';
 import ColumnsPlot from '../../graphs/ColumnsPlot';
-import styled from 'styled-components';
 import BoxPlot from '../../graphs/BoxPlot';
 import ViolinPlot from '../../graphs/ViolinPlot';
+import ConfusionMatrixPlot from '../../graphs/ConfusionMatrixPlot';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 import Label from '../../components/Label';
 import Checkbox from '../../components/Checbox';
 import Range from '../../components/Range';
-import ConfusionMatrixPlot from '../../graphs/ConfusionMatrixPlot';
 import Loading from '../../components/Loading';
+import Container from '../../components/Container';
+import Content from '../../components/Content';
+import Form from '../../components/Form';
+import FormGroup from '../../components/FormGroup';
+import Visualization from '../../components/Visualization';
+import FlexContainer from '../../components/FlexContainer';
 import treinarKNN from '../../services/treinamentoKNN';
-
-const Container = styled.div`
-  display: flex;  
-  width: 100vw;
-  height: 100vh;
-`;
-
-const Content = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;  
-  gap: 20px;
-  width: 100vw; 
-`;
-
-const Form = styled.div`
-  background-color: #f0f0f0;
-  padding: 10px;
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 20px;
-`;
-
-
-const Visualization = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FlexContainer = styled.div`
-    gap: 20px;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;    
-`;
 
 function ExampleKNN() {
     const [treinando, setTreinando] = useState(false);
@@ -83,12 +50,12 @@ function ExampleKNN() {
         { label: 'BreastCancer', value: '/datasets/breastCancer.csv' }
     ];
 
-    const handleRangeChange = (event) => {
+    const RangeChange = (event) => {
         setDivisaoConjunto(event.target.value);
     };
 
 
-    const handleCheckboxChange = (event) => {
+    const CheckboxChange = (event) => {
         setNormalize(event);
     };
 
@@ -161,7 +128,7 @@ function ExampleKNN() {
                     <FormGroup>
                         <Checkbox
                             checked={normalize}
-                            onChange={handleCheckboxChange}
+                            onChange={CheckboxChange}
                             text="Normalize"
                         />
 
@@ -172,7 +139,7 @@ function ExampleKNN() {
                             min={1}
                             max={99}
                             step={1}
-                            onChange={handleRangeChange}
+                            onChange={RangeChange}
                         />
                         <div> Treinamento: {divisaoConjunto} % </div>
                         <div> Teste: {100 - divisaoConjunto} % </div>

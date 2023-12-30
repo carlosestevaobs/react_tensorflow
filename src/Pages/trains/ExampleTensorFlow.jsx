@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import ScatterPlot from '../../graphs/ScatterPlot';
 import ColumnsPlot from '../../graphs/ColumnsPlot';
 import treinarTensorFlow from '../../services/treinamentoTensorFlow';
-import styled from 'styled-components';
 import BoxPlot from '../../graphs/BoxPlot';
 import ViolinPlot from '../../graphs/ViolinPlot';
 import LinePlot from '../../graphs/LinePlot';
@@ -14,45 +13,13 @@ import Checkbox from '../../components/Checbox';
 import Range from '../../components/Range';
 import ConfusionMatrixPlot from '../../graphs/ConfusionMatrixPlot';
 import Loading from '../../components/Loading';
+import Container from '../../components/Container';
+import Content from '../../components/Content';
+import Form from '../../components/Form';
+import FormGroup from '../../components/FormGroup';
+import Visualization from '../../components/Visualization';
+import FlexContainer from '../../components/FlexContainer';
 
-
-const Container = styled.div`
-  display: flex;  
-  width: 100vw;
-  height: 100vh;
-`;
-
-const Content = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;  
-  gap: 20px;
-  width: 100vw; 
-`;
-
-const Form = styled.div`
-  background-color: #f0f0f0;
-  padding: 10px;
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 20px;
-`;
-
-
-const Visualization = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FlexContainer = styled.div`
-    gap: 20px;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;    
-`;
 
 function ExampleTensorFlow() {
     const [treinando, setTreinando] = useState(false);
@@ -65,20 +32,15 @@ function ExampleTensorFlow() {
     const acuraciasTreinoRef = useRef([]);
     const lossesTreinoRef = useRef([]);
     const [dataPath, setDataPath] = useState("/datasets/iris.csv");
-
     const [coluna1, setColuna1] = useState(0);
     const [coluna2, setColuna2] = useState(1);
     const [atributo, setAtributo] = useState(0);
-
     const [chartData, setChartData] = useState(null);
-
     const [reaisTreino, setReaisTreino] = useState([]);
     const [preditosTreino, setPreditosTreino] = useState([]);
     const [reaisTeste, setReaisTeste] = useState([]);
     const [preditosTeste, setPreditosTeste] = useState([]);
-
-    const [normalize, setNormalize] = useState(false)
-
+    const [normalize, setNormalize] = useState(false);
     const [divisaoConjunto, setDivisaoConjunto] = useState(70);
 
     const options = [
@@ -90,12 +52,12 @@ function ExampleTensorFlow() {
         { label: 'BreastCancer', value: '/datasets/breastCancer.csv' }
     ];
 
-    const handleRangeChange = (event) => {
+    const RangeChange = (event) => {
         setDivisaoConjunto(event.target.value);
     };
 
 
-    const handleCheckboxChange = (event) => {
+    const CheckboxChange = (event) => {
         setNormalize(event);
     };
 
@@ -174,7 +136,7 @@ function ExampleTensorFlow() {
                     <FormGroup>
                         <Checkbox
                             checked={normalize}
-                            onChange={handleCheckboxChange}
+                            onChange={CheckboxChange}
                             text="Normalize"
                         />
 
@@ -185,7 +147,7 @@ function ExampleTensorFlow() {
                             min={1}
                             max={99}
                             step={1}
-                            onChange={handleRangeChange}
+                            onChange={RangeChange}
                         />
                         <div> Treinamento: {divisaoConjunto} % </div>
                         <div> Teste: {100 - divisaoConjunto} % </div>
@@ -207,10 +169,8 @@ function ExampleTensorFlow() {
                         <ColumnsPlot path={dataPath} />
                         <BoxPlot path={dataPath} attribute={atributo} />
                         <ViolinPlot path={dataPath} attribute={atributo} />
-
                     </FlexContainer>
                     
-
                     <p>Épocas Concluídas: {epocasConcluidas}</p>
                     <FlexContainer>
                         {/* <div>
@@ -232,8 +192,8 @@ function ExampleTensorFlow() {
                             <strong> Loss:</strong> {lossTeste ? lossTeste.toFixed(4) : '-'}
                             
                            
-
-                            {/*<div>
+{/*
+                            <div>
                                 <h2>Predições:</h2>
                                 <table>
                                     <thead>

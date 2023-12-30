@@ -13,10 +13,10 @@ export function divideTreinoETeste(dataPath, divisaoConjunto, normalize) {
             if (normalize) {
                 data = normalizeData(data);
             }
-          //  console.table(data)
+            //  console.table(data)
 
             const numColumns = parsed.data[0] ? Object.keys(parsed.data[0]).length : 0;
-         
+
             const classColumnName = Object.keys(data[0]).pop();
             const uniqueClasses = [...new Set(data.map(item => item[classColumnName]))];
 
@@ -36,10 +36,7 @@ export function divideTreinoETeste(dataPath, divisaoConjunto, normalize) {
                 balancedDataTeste.push(...classGroup.slice(splitIndex));
             });
 
-            console.log("Treino ", balancedDataTreino.length)
-            console.log("Teste ", balancedDataTeste.length)
-            console.log("Classes", uniqueClasses.length)
-            resolve({ treino: balancedDataTreino, teste: balancedDataTeste, colunas: numColumns, numClasses: uniqueClasses.length});
+            resolve({ treino: balancedDataTreino, teste: balancedDataTeste, colunas: numColumns, numClasses: uniqueClasses.length });
         } catch (error) {
             reject(error);
         }

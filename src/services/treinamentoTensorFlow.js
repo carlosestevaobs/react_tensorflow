@@ -25,10 +25,13 @@ async function treinarTensorFlow(
     const { treino: dadosTreino, teste: dadosTeste, colunas: numColunas, numClasses: nClasses } = await divideTreinoETeste(datapath, divisaoConjunto, normalize);
 
     const model = tf.sequential();
-    model.add(tf.layers.dense({ units: 10, inputShape: [numColunas - 1], activation: 'relu' }));
+    model.add(tf.layers.dense({ units: 64, inputShape: [numColunas - 1], activation: 'relu' }));
+    model.add(tf.layers.dropout(0.2)); 
+    model.add(tf.layers.dense({ units: 32, activation: 'relu' }));
     model.add(tf.layers.dense({ units: nClasses, activation: 'softmax' }));
-    model.compile({ loss: 'categoricalCrossentropy', optimizer: 'sgd', metrics: ['accuracy'] });
-
+    
+    model.compile({ loss: 'categoricalCrossentropy', optimizer: 'adam', metrics: ['accuracy'] });
+  
     const callback = {
       onEpochEnd: async (epoch, logs) => {
         setEpocasConcluidas(epoch + 1);
@@ -47,8 +50,7 @@ async function treinarTensorFlow(
         }
         return dicionario[classe];
       });
-      console.log(dicionario)
-
+    
       const xs = tf.tensor2d(features);
       const ys = tf.oneHot(tf.tensor1d(labels, 'int32'), Object.keys(dicionario).length);
 
@@ -61,7 +63,7 @@ async function treinarTensorFlow(
 
     await model.fit(xsTreino, ysTreino, { epochs: epocas, callbacks: callback });
 
-  //  const saveResult = await model.save('downloads://modelTensorFlow');
+    //const saveResult = await model.save('downloads://modelTensorFlow');
 
     const evaluationTreino = model.predict(xsTreino).argMax(-1);
     setReaisTreino(ysTreino.argMax(-1).arraySync());
