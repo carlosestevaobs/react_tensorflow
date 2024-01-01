@@ -70,6 +70,7 @@ const MenuNavbar = () => {
       label: 'KNN',
       submenu: [
         { label: 'Treinamento', link: 'trainknn' },
+          { label: 'Predição', link: 'predictKNN' },
       ],
     },
   ];

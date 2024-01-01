@@ -2,7 +2,10 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
-  width: 100vw;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
   height: 100vh;
 `;
 

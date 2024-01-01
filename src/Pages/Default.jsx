@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const Main = styled.main`
   margin: 0;
-  width: 100vw;
+  width: 100%;
 `;
 
 const Default = () => {
