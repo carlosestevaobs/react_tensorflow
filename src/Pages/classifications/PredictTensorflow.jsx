@@ -100,7 +100,7 @@ function PredictTensorflow() {
             </ul>
           </div>
           {resultadoPrevisao !== null && (
-            <p>Classe predita para a amostra: {resultadoPrevisao}</p>
+            <p>Classe predita: {resultadoPrevisao}</p>
           )}
         </Visualization>
       </Content>

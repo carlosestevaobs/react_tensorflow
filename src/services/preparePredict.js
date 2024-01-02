@@ -18,7 +18,7 @@ export async function prepareData(dataPath) {
     }
     return dicionario[classe];
   });
-
+  console.log(labels)
   return {
     numColumns,
     dicionario
